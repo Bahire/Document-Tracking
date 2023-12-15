@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/app.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}">
+        <script type="module" th:src="@{http://[::1]:5173/@vite/client}" data-navigate-track="reload"></script><link rel="stylesheet" th:href="@{http://[::1]:5173/resources/css/app.css}" data-navigate-track="reload" />
+    <title>docTracker - Dashboard</title>
+
+</head>
+
+<body class="antialiased text-gray-700">
+        <div class="flex justify-between w-screen h-screen min-h-screen bg-darkbg p-4 font-primary">
+        <div class=" bg-black flex flex-col rounded p-4 flex-none">
+            <div class="text-main items-center space-x-2">
+                <i class="fas fa-box"></i>
+                <span class="text-md font-bold">Dashboard</span>
+            </div>
+            <div class="text-main items-center space-x-2">
+                <a th:href="@{/dep/new}">
+                    <i class="fas fa-box"></i>
+                    <span class="text-md font-bold">New Department</span>
+                </a>
+            </div>
+            <div class="mt-12 space-y-4 flex flex-col">
+
+
+
+
+                <form th:action="@{logout}" method="post" id="logout-form">
+                    <button type="submit">
+                        <div class=" text-sm space-y-6 text-label font-semibold space-x-3">
+                            <i class="fas fa-sign-out"></i>
+                            <span>Logout</span>
+                        </div>
+                    </button>
+                </form>
+
+</div>
+        </div>
+        <main class=" m-x-2 w-full h-full flex flex-col space-y-4 p-4 overflow-auto">
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="flex bg-main/10 rounded items-center justify-between p-4">
+                    <img th:src="@{http://localhost:8000/logo-red.svg}" class="h-10" alt="">
+
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-user-circle text-gray-400 font-semibold"></i>
+                        <span class="capitalize text-[14px] text-label">
+                            <span th:text="${username}"></span>
+                        </span>
+
+                    </div>
+                </div>
+            </th:block>
+            
+            <div class="space-y-6 flex flex-col justify-center mt-5 rounded">
+                <span class="font-bold capitalize text-2xl text-main">Applications Received
+                    <span class="text-secondary" th:text="${totalNumber}"></span>
+                </span>
+                <table class=" w-full rounded">
+                    <thead>
+                        <tr class="bg-[#303030] text-label capitalize text-sm leading-normal">
+                            <th class="py-3 px-6 text-left text-xs">Application Date</th>
+                            <th class="py-3 px-6 text-left text-xs">Application Type</th>
+                            <th class="py-3 px-6 text-left text-xs">Applicant Name</th>
+                            <th class="py-3 px-6 text-left text-xs">Email</th>
+                            <th class="py-3 px-6 text-left text-xs">Status</th>
+                            <th class="py-3 px-6 text-left text-xs">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-normal">
+                        <tr th:each="applic : ${applications}">
+                            <td th:text="${#dates.format(applic.applicationDate,'MMM d, YYYY')}"></td>
+                            <td th:text="${applic.department.depName}"></td>
+                            <td th:text="${applic.users.firstName + applic.users.lastName}"></td>
+                            <td th:text="${applic.users.email}"></td>
+                            <td th:text="${applic.status}"></td>
+                            <td style="display: inline-block">
+                                <form th:action="@{/admin/changeStatusReceived}" method="post">
+                                    <input th:hidden="true" th:value="${applic.id}" name="id">
+                                    <button type="submit">Receive</button>
+                                </form>
+                                ||
+                                <form th:action="@{/admin/changeStatusApproved}" method="post">
+                                    <input th:hidden="true" th:value="${applic.id}" name="id">
+                                    <button type="submit">Approve</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </main>
+    </div>
+
+    </body>
+
+</html>

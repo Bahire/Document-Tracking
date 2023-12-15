@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+    />
+    <link rel="stylesheet" th:href="@{/app.css}" />
+    <script
+      type="module"
+      th:src="@{http://[::1]:5173/@vite/client}"
+      data-navigate-track="reload"
+    ></script>
+  
+    <title>docTracker - Home</title>
+  </head>
+
+  <body class="antialiased text-gray-700">
+    <div
+      class="flex flex-col md:flex-row h-screen min-h-screen bg-darkbg font-primary text-label"
+    >
+      <div
+        class="bg-[url('https://blacksourcemedia.com/wp-content/uploads/2023/01/black-business-people.jpg')] bg-cover bg-center h-full w-8/12 hidden md:flex"
+      >
+        <div
+          class="bg-main/50 w-full backdrop-brightness-50 flex flex-col items-center justify-center text-white"
+        >
+          <img th:src="@{http://localhost:8000/logo.svg}" class="h-20 mb-16" alt="" />
+          <span class="text-2xl mb-6">Welcome Back</span>
+          <span class="text-5xl font-bold">We're Glad to Have You Back</span>
+        </div>
+      </div>
+
+      <div
+        class="h-full px-8 py-9 flex flex-col items-center justify-between md:w-1/2"
+      >
+        <div class="flex flex-col w-full space-y-3">
+          <div class="flex flex-col items-center space-y-3 mb-8">
+            <img
+              th:src="@{http://localhost:8000/logo-red.svg}"
+              class="h-10 mb-16"
+              alt=""
+            />
+            <span class="text-main text-3xl font-bold">Sign In</span>
+            <div class="flex w-1/6 space-x-2 justify-between">
+              <div class="bg-secondary w-full p-1 rounded"></div>
+              <div class="bg-secondary p-1 rounded"></div>
+            </div>
+          </div>
+          <form th:action="@{/user/login}" method="post">
+            <div class="flex flex-col space-y-3">
+              <label for="" class="font-semibold text-[13px] text-label"
+                >Email Address</label
+              >
+              <input
+                type="text"
+                name="email"
+                class="outline-none border-2 border-none focus:bg-black rounded-md bg-cards px-3 py-2 w-full text-sm"
+                placeholder="Your Email"
+              />
+            </div>
+
+            <div class="mt-4">
+              <div class="flex flex-col space-y-3">
+                <label for="" class="font-semibold text-[13px] text-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  name="password"
+                  class="outline-none border-2 border-none focus:bg-black rounded-md bg-cards px-3 py-2 w-full text-sm"
+                  placeholder="Your Password"
+                />
+              </div>
+            </div>
+
+            <div class="flex justify-end mt-4">
+              <a
+                th:href="@{./forgot-password}"
+                class="text-main font-semibold text-sm"
+                >Forgot Your Password?</a
+              >
+            </div>
+            <div class="mt-4">
+              <button
+                class="flex justify-between bg-main w-full rounded px-5 py-2 text-white font-semibold items-center justify-center"
+              >
+                <span>Login</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="mt-12 flex justify-center">
+              <span class="text-sm"
+                >If you don't have an account,
+                <a th:href="@{/user/new}">
+                  <span class="text-secondary font-bold">Create one here</span>
+                </a>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div>
+          <span class="text-sm">
+            For more information about your application
+            <span class="text-main underline"
+              ><a th:href="@{/track}" class="font-bold">Track it from here</a></span
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:wire="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/app.css}">
+        <script type="module" th:src="@{http://[::1]:5173/@vite/client}" data-navigate-track="reload"></script><link rel="stylesheet" th:href="@{http://[::1]:5173/resources/css/app.css}" data-navigate-track="reload" />
+    <title>docTracker - Dashboard</title>
+
+<!-- Livewire Styles --><style >[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid], [wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short], [wire\:loading\.delay\.long], [wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest] {display:none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}[x-cloak] {display: none;}</style></head>
+
+<body class="antialiased text-gray-700">
+        <div class="flex justify-between w-screen h-screen min-h-screen bg-darkbg p-4 font-primary text-label">
+        <div class=" bg-black flex flex-col rounded p-4 flex-none">
+            <div class="text-main items-center space-x-2">
+                <i class="fas fa-box"></i>
+                <span class="text-md font-bold">Dashboard</span>
+            </div>
+
+            <div class="mt-12 space-y-4 flex flex-col">
+    
+
+    
+            <a th:href="@{./application.html}"
+    >
+    <div class="text-secondary text-sm space-y-6 text-label font-semibold space-x-3">
+        <i class="fas fa-file"></i>
+        <span>Application</span>
+    </div>
+    </a>
+    
+    <a th:href="@{#}"
+     onclick="document.getElementById('logout-form').submit()" >
+    <div class=" text-sm space-y-6 text-label font-semibold space-x-3">
+        <i class="fas fa-sign-out"></i>
+        <span>Logout</span>
+    </div>
+            <form th:action="@{/logout}" method="post" id="logout-form"><input type="hidden" name="_token" value="8ZmAiIbmf4GtvVcj1ACw79BTT8PNiMa4Vm9huNVP"></form>
+    </a>
+
+</div>
+
+        </div>
+        <main class=" m-x-2 w-full h-full flex flex-col space-y-4 p-4 overflow-auto ">
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="flex bg-main/10 rounded items-center justify-between p-4">
+                    <img th:src="@{http://localhost:8000/logo-red.svg}" class="h-10" alt="">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-user-circle text-gray-400"></i>
+                        <span class="capitalize text-xs font-semibold">
+                            <span th:text="${username}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div
+                    class="bg-[url('https://www.greatadventuresafaris.com/wp-content/uploads/Kigali-convetion-cetre-1200x675.jpg')] bg-center bg-cover rounded overflow-hidden">
+                    <div class="flex flex-col space-y-4 bg-main/50 text-white backdrop-brightness-50 p-4 h-full">
+                        <span class="font-semibold text-[18px]">Welcome Back Dear <span
+                                class="capitalize"><span th:text="${username}"></span></span></span>
+                        <p class="text-xs">
+                           <a th:href="@{https://rdb.rw/media/}" target="_blank">Check out latest news from RDB applications</a>
+                        </p>
+                    </div>
+                </div>
+            </th:block>
+            <div class="flex flex-col space-y-2 py-4">
+                <span class="text-main capitalize font-bold text-3xl">Make your application</span>
+                <span class="text-sm">Fill out the needed requirements for your application to be
+                    processed. <span> if you want to track your document <a th:href="@{/track}" class="text-main">Click here</a></span></span>
+            </div>
+            <div wire:snapshot="{&quot;data&quot;:{&quot;draftApplication&quot;:null,&quot;departments&quot;:[[],{&quot;class&quot;:&quot;Illuminate\\Database\\Eloquent\\Collection&quot;,&quot;s&quot;:&quot;clctn&quot;}],&quot;applications&quot;:[[],{&quot;class&quot;:&quot;Illuminate\\Database\\Eloquent\\Collection&quot;,&quot;s&quot;:&quot;clctn&quot;}],&quot;hasLetter&quot;:&quot;no&quot;,&quot;hasBusinessPlan&quot;:&quot;no&quot;,&quot;hasShareholder&quot;:&quot;no&quot;,&quot;department&quot;:null,&quot;applicationLetter&quot;:null,&quot;business_plan&quot;:null,&quot;certificate&quot;:null,&quot;shareholder&quot;:null},&quot;memo&quot;:{&quot;id&quot;:&quot;P69g3ewUuNj1XFzNnmD9&quot;,&quot;name&quot;:&quot;client.application-form&quot;,&quot;path&quot;:&quot;client\/applications&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;children&quot;:[],&quot;lazyLoaded&quot;:true,&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;ce7c3f3684bcf50c3e3fe08c1a17c45d8783ba180c48af3cf6d0d0bbcd967c5e&quot;}" wire:effects="[]" wire:id="P69g3ewUuNj1XFzNnmD9" class="space-y-4 md:space-x-4 flex justify-between flex-col md:flex-row text-label">
+    <div class="flex flex-col space-y-3 w-full">
+        <!-- __BLOCK__ --> <!-- __ENDBLOCK__ -->
+        <form th:action="@{/application/new}" th:object="${app}" method="post" enctype="multipart/form-data">
+            <div class="bg-[#151515] rounded-md overflow-hidden w-full">
+
+                <div
+                    class="bg-[#303030] p-3 flex flex-col space-y-3 justify-center items-center md:space-x-3 md:flex-row md:items-center md:justify-between">
+                    <span class="font-bold text-[14px]">Provide All Documents Needed</span>
+                    <select th:field="*{department}" id="" class=" rounded outline-none p-3 bg-cards" required>
+                        <option value="" >Choose Service</option>
+                        <option th:each="dep : ${departments}"
+                                th:value="${dep.depId}"
+                                th:text="${dep.depName}"
+                        ></option>
+                    </select>
+                </div>
+
+
+                <div class="py-3">
+                    <div>
+                        <div class="flex flex-col space-y-4 justify-between p-3 md:flex-row">
+                            <div class="flex items-center space-x-4">
+                                <div class="">
+                                        <!-- __BLOCK__ -->                                        <i class="fas fa-circle text-gray-400"></i>
+                                         <!-- __ENDBLOCK__ -->
+                                </div>
+                                <div class="flex flex-col">
+                                        <span class="text-[15px] font-bold">Application Letter <span class="text-main">*</span></span>
+                                        <span class="text-[12px] text-[#d9d9d9]">The document should be in .docx or .pdf </span>
+                                </div>
+                            </div>
+
+                            <div class="flex-none">
+                                    <button class="bg-secondary text-white p-2 rounded text-sm">
+                                        <span>
+
+                                            <input type="file"  required id="letter" name="letter" accept="document/*" class="form-control form-control-file">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </span>
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-t-gray-100 border-dashed"></div>
+
+                    <div>
+                        <div class="flex flex-col space-y-4 justify-between p-3 md:flex-row">
+                            <div class="flex items-center space-x-4">
+                                <div class="">
+                                        <!-- __BLOCK__ -->                                        <i class="fas fa-circle text-gray-400"></i>
+                                         <!-- __ENDBLOCK__ -->
+                                </div>
+                                <div class="flex flex-col">
+                                        <span class="text-[15px] font-bold">Business plan / feasibility study <span class="text-main">*</span></span>
+                                        <span class="text-[12px] text-gray-300">The document should be in .docx or .pdf </span>
+                                </div>
+                            </div>
+
+                            <div class="flex-none">
+                                <button class="bg-secondary text-white p-2 rounded text-sm">
+                                        <span>
+                                            <input type="file"  required id="business" name="business" accept="document/*" class="form-control form-control-file">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </span>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="border border-t-gray-100 border-dashed"></div>
+
+                    <div>
+                        <div class="flex flex-col space-y-4 justify-between p-3 md:flex-row">
+                            <div class="flex items-center space-x-4">
+                                <div class="">
+                                        <!-- __BLOCK__ -->                                        <i class="fas fa-circle text-gray-400"></i>
+                                         <!-- __ENDBLOCK__ -->
+                                </div>
+                                <div class="flex flex-col">
+                                        <span class="text-[15px] font-bold">Shareholder business plan <span class="text-main">*</span></span>
+                                        <span class="text-[12px] text-gray-300">The document should be in .docx or .pdf </span>
+                                </div>
+                            </div>
+
+                            <div class="flex-none">
+                                <button class="bg-secondary text-white p-2 rounded text-sm">
+                                        <span>
+                                            <input type="file"  required id="shareholder" name="shareholder" accept="document/*" class="form-control form-control-file">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </span>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="py-4">
+                <button class="bg-main text-white p-4 rounded text-sm " wire:click=submit>
+                    <span class="font-bold" wire:loading.remove wire:target="submit">Submit Application</span></span>
+                    <div
+                    class="inline-block h-4 w-4 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                        >Loading...</span
+                    >
+                    </div>
+
+                    </span>
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="w-full">
+        <table class=" w-full rounded-xl">
+            <thead class="rounded">
+                <tr class="bg-[#303030] text-label capitalize text-sm leading-normal rounded">
+                    <th class="py-4 px-6 text-left text-xs">Application Date</th>
+                    <th class="py-4 px-6 text-left text-xs">Application Type</th>
+                    <th class="py-4 px-6 text-left text-xs">Tracking Code</th>
+                    <th class="py-4 px-6 text-left text-xs">Status</th>
+<!--                    <th class="py-4 px-6 text-left text-xs">Payment</th>-->
+                </tr>
+            </thead>
+            <tbody class="text-label text-sm font-normal">
+                <tr th:each="document : ${applications}">
+                    <td th:text="${#dates.format(document.applicationDate,'MM dd, YYYY')}"></td>
+                    <td th:text="${document.department.depName}"></td>
+                    <td th:text="${document.trackingNumber}"></td>
+                    <th th:text="${document.status}"></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+
+</div>
+
+        </main>
+    </div>
+
+    <!-- Livewire Scripts -->
+<script th:src="@{/livewire/livewire.js?id=3948ee27}"   data-csrf="8ZmAiIbmf4GtvVcj1ACw79BTT8PNiMa4Vm9huNVP" data-uri="/livewire/update" data-navigate-once="true"></script></body>
+
+</html>
